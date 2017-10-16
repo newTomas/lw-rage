@@ -123,8 +123,25 @@ function downCam() {
 
 function forwardCam() {
     let pos = cam.getCoord();
-    pos.x = Math.round(pos.x) + 1;
-    cam.setCoord(pos.x, pos.y, pos.z);
+    let rot = cam.getRot(2);
+    if(rot.z >= (-90) && rot.z <= 0){
+        let newposx = (-rot.z * 10) / 900;
+        pos.x = pos.x + newposx;
+        pos.y = pos.y + (1 - newposx);
+    } else if(rot.z > 0 && rot.z <= 90){
+        let newposx = (rot.z * 10) / 900;
+        pos.x = pos.x + newposx;
+        pos.y = pos.y + (1 - newposx);
+    } else if(rot.z < (-90) && rot.z >= (-180)){
+        let newposx = ((-rot.z - 90) * 10) / 900;
+        pos.x = pos.x - newposx;
+        pos.y = pos.y - (1 - newposx);
+    } else if(rot.z > 90 && rot.z < 180){
+        let newposx = ((rot.z - 90) * 10) / 900;
+        pos.x = pos.x - newposx;
+        pos.y = pos.y - (1 - newposx);
+    }
+    cam.setCoord(pos.x.toFixed(1), pos.y.toFixed(1), pos.z);
     mp.gui.chat.push('Test ' + pos.x);
 }
 
