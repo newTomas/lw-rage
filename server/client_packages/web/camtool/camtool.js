@@ -93,62 +93,71 @@ function toggleCam() {
 
 function leftCam() {
     let rot = cam.getRot(2);
+    rot.z = Math.round(rot.z) + 1;
+    cam.setRot(rot.x, 0, rot.z, 2);
     mp.gui.chat.push("TEST: " + rot.z);
-    cam.setRot(rot.x, 0, rot.z + 1, 2);
 }
 
 function rightCam() {
     let rot = cam.getRot(2);
+    rot.z = Math.round(rot.z) - 1;
+    cam.setRot(rot.x, 0, rot.z, 2);
     mp.gui.chat.push("TEST: " + rot.z);
-    cam.setRot(rot.x, 0, rot.z - 1, 2);
 }
 
 function upCam() {
     let rot = cam.getRot(2);
+    rot.x = Math.round(rot.x) + 1;
+    cam.setRot(rot.x, 0, rot.z, 2);
     mp.gui.chat.push("TEST: " + rot.x);
-    cam.setRot(rot.x + 1, 0, rot.z, 2);
 }
 
 function downCam() {
     let rot = cam.getRot(2);
+    rot.x = Math.round(rot.x) - 1;
+    cam.setRot(rot.x, 0, rot.z, 2);
     mp.gui.chat.push("TEST: " + rot.x);
-    cam.setRot(rot.x - 1, 0, rot.z, 2);
 }
 
 // MARK: - Move camera
 
 function forwardCam() {
     let pos = cam.getCoord();
+    pos.x = Math.round(pos.x) + 1;
+    cam.setCoord(pos.x, pos.y, pos.z);
     mp.gui.chat.push('Test ' + pos.x);
-    cam.setCoord(pos.x + 1, pos.y, pos.z);
 }
 
 function backwardCam() {
     let pos = cam.getCoord();
+    pos.x = Math.round(pos.x) - 1;
+    cam.setCoord(pos.x, pos.y, pos.z);
+    camera.pointAtCoord(pos.x, pos.y, pos.z);
     mp.gui.chat.push('Test ' + pos.x);
-    cam.setCoord(pos.x - 1, pos.y, pos.z);
 }
 
 function moveRightCam() {
     let pos = cam.getCoord();
+    pos.y = Math.round(pos.y) + 1;
+    cam.setCoord(pos.x, pos.y, pos.z);
     mp.gui.chat.push('Test ' + pos.y);
-    cam.setCoord(pos.x, pos.y + 1, pos.z);
 }
 
 function moveLeftCam() {
     let pos = cam.getCoord();
+    pos.y = Math.round(pos.y) - 1;
+    cam.setCoord(pos.x, pos.y, pos.z);
     mp.gui.chat.push('Test ' + pos.y);
-    cam.setCoord(pos.x, pos.y - 1, pos.z);
 }
 
 function moveUpCam() {
     let pos = cam.getCoord();
-    mp.gui.chat.push('Test ' + pos.z);
     cam.setCoord(pos.x, pos.y, pos.z + 1);
+    mp.gui.chat.push('Test ' + pos.z);
 }
 
 function moveDownCam() {
     let pos = cam.getCoord();
+    cam.setCoord(pos.x, pos.y, pos.z - 1);
     mp.gui.chat.push('Test ' + pos.z);
-    cam.setCoord(pos.x1, pos.y, pos.z - 1);
 }
