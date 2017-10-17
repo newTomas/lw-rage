@@ -130,8 +130,59 @@ function forwardCam() {
         pos.y = pos.y + (1 - newposx);
     } else if(rot.z > 0 && rot.z <= 90){
         let newposx = (rot.z * 10) / 900;
-        pos.x = pos.x + newposx;
+        pos.x = pos.x - newposx;
         pos.y = pos.y + (1 - newposx);
+    } else if(rot.z < (-90) && rot.z >= (-180)){
+        let newposx = ((-rot.z - 90) * 10) / 900;
+        pos.x = pos.x + (1 - newposx);
+        pos.y = pos.y - newposx;
+    } else if(rot.z > 90 && rot.z < 180){
+        let newposx = ((rot.z - 90) * 10) / 900;
+        pos.x = pos.x - (1 - newposx);
+        pos.y = pos.y - newposx;
+    }
+    cam.setCoord(pos.x, pos.y, pos.z);
+    mp.gui.chat.push('Test x ' + pos.x);
+    mp.gui.chat.push('Test y ' + pos.y);
+}
+
+function backwardCam() {
+    let pos = cam.getCoord();
+    let rot = cam.getRot(2);
+    if(rot.z >= (-90) && rot.z <= 0){
+        let newposx = (-rot.z * 10) / 900;
+        pos.x = pos.x - newposx;
+        pos.y = pos.y - (1 - newposx);
+    } else if(rot.z > 0 && rot.z <= 90){
+        let newposx = (rot.z * 10) / 900;
+        pos.x = pos.x + newposx;
+        pos.y = pos.y - (1 - newposx);
+    } else if(rot.z < (-90) && rot.z >= (-180)){
+        let newposx = ((-rot.z - 90) * 10) / 900;
+        pos.x = pos.x - (1 - newposx);
+        pos.y = pos.y + newposx;
+    } else if(rot.z > 90 && rot.z < 180){
+        let newposx = ((rot.z - 90) * 10) / 900;
+        pos.x = pos.x + (1 - newposx);
+        pos.y = pos.y + newposx;
+    }
+    cam.setCoord(pos.x, pos.y, pos.z);
+    camera.pointAtCoord(pos.x, pos.y, pos.z);
+    mp.gui.chat.push('Test x ' + pos.x);
+    mp.gui.chat.push('Test y ' + pos.y);
+}
+
+function moveRightCam() {
+    let pos = cam.getCoord();
+    let rot = cam.getRot(2);
+    if(rot.z >= (-90) && rot.z <= 0){
+        let newposx = (-rot.z * 10) / 900;
+        pos.x = pos.x + (1 - newposx);
+        pos.y = pos.y - newposx;
+    } else if(rot.z > 0 && rot.z <= 90){
+        let newposx = (rot.z * 10) / 900;
+        pos.x = pos.x + (1 - newposx);
+        pos.y = pos.y + newposx;
     } else if(rot.z < (-90) && rot.z >= (-180)){
         let newposx = ((-rot.z - 90) * 10) / 900;
         pos.x = pos.x - newposx;
@@ -139,30 +190,32 @@ function forwardCam() {
     } else if(rot.z > 90 && rot.z < 180){
         let newposx = ((rot.z - 90) * 10) / 900;
         pos.x = pos.x - newposx;
-        pos.y = pos.y - (1 - newposx);
+        pos.y = pos.y + (1 - newposx);
     }
-    cam.setCoord(pos.x.toFixed(1), pos.y.toFixed(1), pos.z);
-    mp.gui.chat.push('Test ' + pos.x);
-}
-
-function backwardCam() {
-    let pos = cam.getCoord();
-    pos.x = Math.round(pos.x) - 1;
-    cam.setCoord(pos.x, pos.y, pos.z);
-    camera.pointAtCoord(pos.x, pos.y, pos.z);
-    mp.gui.chat.push('Test ' + pos.x);
-}
-
-function moveRightCam() {
-    let pos = cam.getCoord();
-    pos.y = Math.round(pos.y) + 1;
     cam.setCoord(pos.x, pos.y, pos.z);
     mp.gui.chat.push('Test ' + pos.y);
 }
 
 function moveLeftCam() {
     let pos = cam.getCoord();
-    pos.y = Math.round(pos.y) - 1;
+    let rot = cam.getRot(2);
+    if(rot.z >= (-90) && rot.z <= 0){
+        let newposx = (-rot.z * 10) / 900;
+        pos.x = pos.x - (1 - newposx);
+        pos.y = pos.y + newposx;
+    } else if(rot.z > 0 && rot.z <= 90){
+        let newposx = (rot.z * 10) / 900;
+        pos.x = pos.x - (1 - newposx);
+        pos.y = pos.y - newposx;
+    } else if(rot.z < (-90) && rot.z >= (-180)){
+        let newposx = ((-rot.z - 90) * 10) / 900;
+        pos.x = pos.x + newposx;
+        pos.y = pos.y + (1 - newposx);
+    } else if(rot.z > 90 && rot.z < 180){
+        let newposx = ((rot.z - 90) * 10) / 900;
+        pos.x = pos.x + newposx;
+        pos.y = pos.y - (1 - newposx);
+    }
     cam.setCoord(pos.x, pos.y, pos.z);
     mp.gui.chat.push('Test ' + pos.y);
 }
