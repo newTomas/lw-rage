@@ -58,21 +58,15 @@ let moveDown = {
     run: moveDownCam
 }
 
-let testWindow = {
+let camtoolWindow = {
     browser: mp.browsers.new('package://web/camtool/index.html'),
     key: 69 // e
 }
 
-mp.events.add("camtool:cords", function () {
-    let start = arguments[0];
-    let stop = arguments[1];
-    mp.events.callRemote("camtool:start", start, stop);
-});
-
-testWindow.browser.active = false;
+camtoolWindow.browser.active = false;
 
 keyboard.bindAction(camtool);
-keyboard.bindWindow(testWindow);
+keyboard.bindWindow(camtoolWindow);
 
 keyboard.bindAction(left);
 keyboard.bindAction(right);
